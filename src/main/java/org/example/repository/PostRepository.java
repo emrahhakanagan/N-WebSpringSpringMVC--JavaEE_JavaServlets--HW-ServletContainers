@@ -21,7 +21,7 @@ public class PostRepository {
     return Optional.ofNullable(posts.get(id));
     }
 
-  public synchronized Post save(Post post) {
+  public Post save(Post post) {
     long id = post.getId();
 
     posts.compute(id, (currentId, currentPost) -> {
