@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 public class PostRepository {
   private final ConcurrentHashMap<Long, Post> posts = new ConcurrentHashMap<>();
   private final AtomicLong currentId = new AtomicLong(0);
+
   public List<Post> all() {
     return posts.values().stream().collect(Collectors.toList());
   }

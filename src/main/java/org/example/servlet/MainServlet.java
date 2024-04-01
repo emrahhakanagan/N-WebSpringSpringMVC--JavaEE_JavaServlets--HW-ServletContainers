@@ -1,6 +1,5 @@
 package org.example.servlet;
 
-
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -9,6 +8,8 @@ import org.example.repository.PostRepository;
 import org.example.service.PostService;
 
 public class MainServlet extends HttpServlet {
+  private static final String API_POSTS_PATH = "/api/posts";
+  private static final String API_POSTS_ID_PATH_REGEX = "/api/posts/\\d+";
   private PostController controller;
 
   @Override
@@ -25,21 +26,21 @@ public class MainServlet extends HttpServlet {
       final var path = req.getRequestURI();
       final var method = req.getMethod();
       // primitive routing
-      if (method.equals("GET") && path.equals("/api/posts")) {
+      if (method.equals("GET") && path.equals(API_POSTS_PATH)) {
         controller.all(resp);
         return;
       }
-      if (method.equals("GET") && path.matches("/api/posts/\\d+")) {
+      if (method.equals("GET") && path.matches(API_POSTS_ID_PATH_REGEX)) {
         // easy way
         final var id = Long.parseLong(path.substring(path.lastIndexOf("/")));
         controller.getById(id, resp);
         return;
       }
-      if (method.equals("POST") && path.equals("/api/posts")) {
+      if (method.equals("POST") && path.equals(API_POSTS_PATH)) {
         controller.save(req.getReader(), resp);
         return;
       }
-      if (method.equals("DELETE") && path.matches("/api/posts/\\d+")) {
+      if (method.equals("DELETE") && path.matches(API_POSTS_ID_PATH_REGEX)) {
         // easy way
         final var id = Long.parseLong(path.substring(path.lastIndexOf("/")));
         controller.removeById(id, resp);
