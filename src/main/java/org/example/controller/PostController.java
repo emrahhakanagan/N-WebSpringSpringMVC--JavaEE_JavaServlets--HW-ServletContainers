@@ -5,10 +5,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.example.exception.NotFoundException;
 import org.example.model.Post;
 import org.example.service.PostService;
+import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 import java.io.Reader;
 
+@Controller
 public class PostController {
   private static final String APPLICATION_JSON = "application/json";
   private final PostService service;

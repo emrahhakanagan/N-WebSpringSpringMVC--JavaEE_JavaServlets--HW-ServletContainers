@@ -1,6 +1,7 @@
 package org.example.repository;
 
 import org.example.model.Post;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
-// Stub
+@Repository
 public class PostRepository {
   private final ConcurrentHashMap<Long, Post> posts = new ConcurrentHashMap<>();
   private final AtomicLong currentId = new AtomicLong(0);
