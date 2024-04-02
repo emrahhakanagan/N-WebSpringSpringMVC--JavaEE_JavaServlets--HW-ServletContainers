@@ -3,9 +3,9 @@ package org.example.servlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.configurations.AppConfig;
 import org.example.controller.PostController;
-import org.example.repository.PostRepository;
-import org.example.service.PostService;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class MainServlet extends HttpServlet {
   private static final String API_POSTS_PATH = "/api/posts";
@@ -14,9 +14,8 @@ public class MainServlet extends HttpServlet {
 
   @Override
   public void init() {
-    final var repository = new PostRepository();
-    final var service = new PostService(repository);
-    controller = new PostController(service);
+    AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+    this.controller = context.getBean(PostController.class);
   }
 
   @Override
